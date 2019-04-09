@@ -1,19 +1,19 @@
 import { defineMessages } from 'react-intl';
 
-const template = (configContext) => {
+ const template = (configContext) => {
   const {
     React,
   } = configContext.lib;
 
-  const {
+   const {
     Col,
   } = configContext.layoutComponents;
 
-  const {
+   const {
     Field,
   } = configContext.recordComponents;
 
-  return (
+   return (
     <Field name="document">
       <Col>
         <Field name="name" />
@@ -23,7 +23,7 @@ const template = (configContext) => {
   );
 };
 
-export default configContext => ({
+ export default configContext => ({
   messages: defineMessages({
     name: {
       id: 'form.batch.default.name',

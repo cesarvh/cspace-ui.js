@@ -7,11 +7,11 @@ import fields from './fields';
 export default () => configContext => ({
   recordTypes: {
     batch: {
+      forms: forms(configContext),
+      fields: fields(configContext),
       messages,
       serviceConfig,
       columns: columns(configContext),
-      forms: forms(configContext),
-      fields: fields(configContext),
     },
   },
 });
