@@ -67,6 +67,10 @@ function RootPage(props) {
         <ProtectedRouteContainer path="/dashboard" component={DashboardPage} />
         <ProtectedRouteContainer path="/create" component={injectIntl(CreatePageContainer)} />
         <ProtectedRouteContainer path="/admin" component={AdminPageContainer} />
+        <ProtectedRouteContainer 
+          path="/batch/:recordType?/:csid?" 
+          component={BatchJobPageContainer}
+        />
 
         <ProtectedRouteContainer
           path="/search/:recordType?/:vocabulary?"
