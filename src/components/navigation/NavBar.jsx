@@ -25,7 +25,7 @@ const messages = defineMessages({
   },
   batch: {
     id: 'navBar.batch',
-    defaultMessage: 'Batchjobs'
+    defaultMessage: 'Batch'
   },
 });
 

@@ -21,6 +21,7 @@ import SearchResultPageContainer from '../../containers/pages/SearchResultPageCo
 import NotificationBarContainer from '../../containers/notification/NotificationBarContainer';
 import styles from '../../../styles/cspace-ui/RootPage.css';
 import favicon from '../../../images/favicon.png';
+import BatchjobPageContainer from '../../containers/pages/BatchjobPageContainer';
 
 const messages = defineMessages({
   title: {
@@ -69,7 +70,8 @@ function RootPage(props) {
         <ProtectedRouteContainer path="/admin" component={AdminPageContainer} />
         <ProtectedRouteContainer 
           path="/batch/:recordType?/:csid?" 
-          component={BatchJobPageContainer}
+          // component={BatchjobPage}
+          component={BatchjobPageContainer}
         />
 
         <ProtectedRouteContainer
