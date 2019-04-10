@@ -9,12 +9,12 @@ const { LineInput, MiniButton } = inputComponents;
 const messages = defineMessages({
   filter: {
     id: 'invocablesSearchBar.filter',
-    description: 'Label of the input on the search bar of the reporting page.',
+    description: 'Label of the input on the search bar of the bath job page.',
     defaultMessage: 'Filter by name',
   },
   clear: {
     id: 'invocablesSearchBar.clear',
-    description: 'Label of the clear button on the search bar of the reporting page.',
+    description: 'Label of the clear button on the search bar of the bath job page.',
     defaultMessage: 'Clear',
   },
 });

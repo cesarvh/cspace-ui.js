@@ -63,15 +63,66 @@ export default class BatchjobPage extends Component {
   }
 
   filter(value) {
-    // TO DO
+    const {
+      searchDescriptor,
+    } = this.state;
+
+    const searchQuery = searchDescriptor.get('searchQuery');
+    let updatedSearchQuery;
+    console.log(value + "vvv");
+    if (value) {
+      const baseFilter = searchQuery.get('as');
+      const valueFilter = {
+        value,
+        op: OP_CONTAIN,
+        path: 'ns2:batch_common/name',
+      }
+
+      updatedSearchQuery = searchQuery.set('as', Immutable.fromJS({
+        value: {
+          baseFilter,
+          valueFilter,
+        },
+        op: OP_AND,
+      }))
+    } else {
+      updatedSearchQuery = searchQuery.set('as', Immutable.fromJS({
+        // value: 1,
+        // op: OP_EQ,
+        // path: 'ns2:batch_common/supportsParams',,
+      }));
+    }
+
+    updatedSearchQuery = updatedSearchQuery.set('p', 0);
+
+    this.setState({
+      filterValue: value,
+      searchDescriptor: searchDescriptor.set('searchQuery', updatedSearchQuery),
+    });
   }
 
   handleItemClick(item) {
     // TO DO
   }
 
-  handleSearchBarChange() {
-    // TO DO
+  handleSearchBarChange(value) {
+    if (this.filterTimer) {
+      window.clearTimeout(this.filterTimer);
+      this.filterTimer = null;
+    }
+
+    if (value) {
+      const {
+        filterDelay,
+      } = this.props;
+
+      this.filterTimer = window.setTimeout(() =>{
+        this.filter(value);
+        this.filterTimer = null;
+      }, filterDelay);
+    } else {
+      this.filter(value);
+    }
   }
 
   handleSearchDescriptorChange() {
