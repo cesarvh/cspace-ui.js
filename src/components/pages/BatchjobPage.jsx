@@ -1,3 +1,5 @@
+/* global window */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Immutable from 'immutable';
@@ -102,7 +104,21 @@ export default class BatchjobPage extends Component {
   }
 
   handleItemClick(item) {
-    // TO DO
+    const {
+      history,
+      perms,
+    } = this.props;
+
+    if (canRead(recordType, perms)) {
+      const csid = item.get('csid');
+      history.replace(`batch/${recordType}/${csid}}`);
+
+      this.setState({
+        currentItem: item,
+      });
+    }
+
+    return false;
   }
 
   handleSearchBarChange(value) {
@@ -125,8 +141,10 @@ export default class BatchjobPage extends Component {
     }
   }
 
-  handleSearchDescriptorChange() {
-    // TO DO
+  handleSearchDescriptorChange(searchDescriptor) {
+    this.setState({
+      searchDescriptor,
+    });
   }
 
   renderSearchBar()  {
