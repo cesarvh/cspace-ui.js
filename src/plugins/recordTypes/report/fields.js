@@ -1,4 +1,5 @@
 import { defineMessages } from 'react-intl';
+import CheckboxInput from 'cspace-input/lib/components/CheckboxInput';
 
 export default (configContext) => {
   const {
@@ -58,6 +59,19 @@ export default (configContext) => {
             },
           },
         },
+        supportsParams: {
+          [config]: {
+            messages: defineMessages({
+              name: {
+                id: 'field.reports_common.supportsParams.name',
+                defaultMessage: 'supportsParams',
+              },
+            }),
+            view: {
+              type: CheckboxInput,
+            },
+          },
+        }
       },
     },
   };

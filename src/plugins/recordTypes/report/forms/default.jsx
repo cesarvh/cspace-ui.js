@@ -18,6 +18,7 @@ const template = (configContext) => {
       <Col>
         <Field name="name" />
         <Field name="notes" />
+        <Field name="supportsParams" />
       </Col>
     </Field>
   );

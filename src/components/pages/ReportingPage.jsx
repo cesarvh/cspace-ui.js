@@ -41,11 +41,11 @@ const recordType = 'report';
 const getSearchDescriptor = () => Immutable.fromJS({
   recordType,
   searchQuery: {
-    as: {
-      value: 1,
-      op: OP_EQ,
-      path: 'ns2:reports_common/supportsParams',
-    },
+      as: {
+        value: 1,
+        op: OP_EQ,
+        path: 'ns2:reports_common/supportsParams',
+      },
     size: 20,
   },
 });
