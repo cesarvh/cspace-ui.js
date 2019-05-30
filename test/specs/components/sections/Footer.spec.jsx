@@ -120,6 +120,6 @@ describe('Footer', () => {
     const lists = this.container.querySelectorAll('ul');
     const items = lists[1].querySelectorAll('li');
 
-    items[2].textContent.should.equal('formatted somePlugin.name version 1.2.3');
+    items[2].textContent.should.equal('UC Berkeley formatted somePlugin.name version 1.2.3');
   });
 });
