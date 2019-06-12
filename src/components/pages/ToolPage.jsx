@@ -8,6 +8,7 @@ import ToolNavBar from '../navigation/ToolNavBar';
 import TitleBar from '../sections/TitleBar';
 import { canList } from '../../helpers/permissionHelpers';
 import styles from '../../../styles/cspace-ui/AdminPage.css';
+import BatchPageContainer from '../../containers/pages/BatchPageContainer';
 
 const messages = defineMessages({
   title: {
@@ -18,7 +19,7 @@ const messages = defineMessages({
 
 const tabs = [
   'report',
-  // 'batch',
+  'batch',
 ];
 
 const propTypes = {
@@ -54,7 +55,7 @@ export default function ToolPage(props) {
         <Redirect exact path={basename} to={`${basename}/${redirectTabName}`} />
 
         <Route path={`${basename}/report/:csid?`} component={ReportPageContainer} />
-        {/* <Route path={`${basename}/batch/:csid?`} component={BatchPageContainer} /> */}
+        <Route path={`${basename}/batch/:csid?`} component={BatchPageContainer} />
       </Switch>
     </div>
   );
