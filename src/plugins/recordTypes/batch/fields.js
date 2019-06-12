@@ -58,27 +58,6 @@ import { defineMessages } from 'react-intl';
             },
           },
         },
-        forDocTypes: {
-          [config]: {
-            view: {
-              type: CompoundInput,
-            },
-          },
-          forDocType: {
-            [config]: {
-              messages: defineMessages({
-                name: {
-                  id: 'field.movements_common.forDocType.name',
-                  defaultMessage: 'For Doc Types',
-                },
-              }),
-              repeating: true,
-              view: {
-                type: TextInput,
-              },
-            },
-          },
-        },
       },
     },
   };

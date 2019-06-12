@@ -18,9 +18,6 @@ import { defineMessages } from 'react-intl';
       <Col>
         <Field name="name" />
         <Field name="notes" />
-        <Field name="forDocTypes">
-          <Field name="forDocType" />
-        </Field>
       </Col>
     </Field>
   );
