@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import get from 'lodash/get';
 import InvocationModal from '../invocable/InvocationModal';
 import ReportSearchBar from '../invocable/ReportSearchBar';
-import { OP_CONTAIN, OP_EQ, OP_AND } from '../../constants/searchOperators';
+import { OP_CONTAIN, OP_EQ, OP_AND, OP_GT } from '../../constants/searchOperators';
 import InvocationModalContainer from '../../containers/invocable/InvocationModalContainer';
 import RecordEditorContainer from '../../containers/record/RecordEditorContainer';
 import SearchPanelContainer from '../../containers/search/SearchPanelContainer';
@@ -49,11 +49,11 @@ const getSearchDescriptor = () => Immutable.fromJS({
   searchQuery: {
     size: 20,
     // TODO: Remove this, after allowing user to select context in the invocation modal.
-    as: {
-      op: OP_EQ,
-      path: 'ns2:batch_common/supportsNoContext',
-      value: 1,
-    },
+    // as: {
+    //   op: OP_EQ,
+    //   path: 'ns2:batch_common/supportsNoContext',
+    //   value: 1,
+    // },
   },
 });
 
@@ -113,10 +113,11 @@ export default class BatchPage extends Component {
         ],
       }));
     } else {
-      updatedSearchQuery = searchQuery.set('as', Immutable.Map({
-        op: OP_EQ,
-        path: 'ns2:batch_common/supportsNoContext',
-        value: 1,
+      updatedSearchQuery = searchQuery.set('searchQuery', Immutable.Map({
+        // op: OP_GT,
+        // path: 'ns2:batch_common/supportsNoContext',
+        // value: 1,
+        size: 20,
       }))
     }
 
