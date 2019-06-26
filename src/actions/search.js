@@ -210,8 +210,46 @@ export const search = (config, searchName, searchDescriptor, listType = 'common'
       return Promise.reject();
     }
 
-    requestConfig.params.sortBy = sortParam;
-  }
+    const nxql = advancedSearchConditionToNXQL(recordTypeConfig.fields, searchQuery.get('as'));
+
+    const requestConfig = {
+      params: {
+        as: nxql ? `(${nxql})` : undefined,
+        csid: searchQuery.get('csid'),
+        doctype: searchQuery.get('doctype'),
+        kw: searchQuery.get('kw'),
+        mkRtSbj: searchQuery.get('mkRtSbj'),
+        mode: toJS(searchQuery.get('mode')),
+        pgNum: searchQuery.get('p'),
+        pgSz: searchQuery.get('size'),
+        rtSbj: searchQuery.get('rel'),
+        rtPredicate: searchQuery.get('relType'),
+        sn: searchQuery.get('sn'), // accounts screen name
+        dn: searchQuery.get('dn'), // role display name
+        wf_deleted: false,
+      },
+    };
+
+    if (searchQuery.get('sort')) {
+      const sortParam = getSortParam(config, searchDescriptor, columnSetName);
+
+      if (!sortParam) {
+        dispatch({
+          type: SEARCH_REJECTED,
+          payload: {
+            code: ERR_INVALID_SORT,
+          },
+          meta: {
+            searchName,
+            searchDescriptor,
+          },
+        });
+
+        return Promise.reject();
+      }
+
+      requestConfig.params.sortBy = sortParam;
+    }
 
   const pathParts = [recordTypeServicePath];
 

@@ -434,7 +434,7 @@ describe('AuthRolePage', () => {
     });
   });
 
-  it('should update the search descriptor when the search bar value changes', () => {
+  it('should update the search descriptor when the search bar value changes', function test() {
     const location = {
       search: '',
     };
@@ -450,8 +450,7 @@ describe('AuthRolePage', () => {
         location={location}
         match={match}
         perms={null}
-      />, context,
-    );
+      />, context);
 
     let result;
     let searchPanel;
@@ -484,7 +483,7 @@ describe('AuthRolePage', () => {
     });
   });
 
-  it('should only update the search descriptor once when the search bar value changes twice within the filter delay', () => {
+  it('should only update the search descriptor once when the search bar value changes twice within the filter delay', function test() {
     const location = {
       search: '',
     };
@@ -500,8 +499,7 @@ describe('AuthRolePage', () => {
         location={location}
         match={match}
         perms={null}
-      />, context,
-    );
+      />, context);
 
     let result;
     let searchPanel;
@@ -522,41 +520,41 @@ describe('AuthRolePage', () => {
         resolve();
       }, 200);
     })
-      .then(() => new Promise((resolve) => {
-        window.setTimeout(() => {
-          result = shallowRenderer.getRenderOutput();
-          searchPanel = findWithType(result, SearchPanelContainer);
+    .then(() => new Promise((resolve) => {
+      window.setTimeout(() => {
+        result = shallowRenderer.getRenderOutput();
+        searchPanel = findWithType(result, SearchPanelContainer);
 
-          searchPanel.props.searchDescriptor.should.equal(Immutable.fromJS({
-            recordType: 'authrole',
-            searchQuery: {
-              size: 20,
-            },
-          }));
+        searchPanel.props.searchDescriptor.should.equal(Immutable.fromJS({
+          recordType: 'authrole',
+          searchQuery: {
+            size: 20,
+          },
+        }));
 
-          resolve();
-        }, 400);
-      }))
-      .then(() => new Promise((resolve) => {
-        window.setTimeout(() => {
-          result = shallowRenderer.getRenderOutput();
-          searchPanel = findWithType(result, SearchPanelContainer);
+        resolve();
+      }, 400);
+    }))
+    .then(() => new Promise((resolve) => {
+      window.setTimeout(() => {
+        result = shallowRenderer.getRenderOutput();
+        searchPanel = findWithType(result, SearchPanelContainer);
 
-          searchPanel.props.searchDescriptor.should.equal(Immutable.fromJS({
-            recordType: 'authrole',
-            searchQuery: {
-              dn: 'another searchval',
-              p: 0,
-              size: 20,
-            },
-          }));
+        searchPanel.props.searchDescriptor.should.equal(Immutable.fromJS({
+          recordType: 'authrole',
+          searchQuery: {
+            dn: 'another searchval',
+            p: 0,
+            size: 20,
+          },
+        }));
 
-          resolve();
-        }, 400);
-      }));
+        resolve();
+      }, 400);
+    }));
   });
 
-  it('should update the search descriptor immediately when the search bar value is blanked', () => {
+  it('should update the search descriptor immediately when the search bar value is blanked', function test() {
     const location = {
       search: '',
     };
@@ -572,8 +570,7 @@ describe('AuthRolePage', () => {
         location={location}
         match={match}
         perms={null}
-      />, context,
-    );
+      />, context);
 
     let result;
     let searchPanel;

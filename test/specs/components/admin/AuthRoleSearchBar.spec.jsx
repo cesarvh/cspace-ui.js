@@ -7,7 +7,7 @@ import AuthRoleSearchBar from '../../../../src/components/admin/AuthRoleSearchBa
 
 chai.should();
 
-describe('AuthRoleSearchBar', () => {
+describe('AuthRoleSearchBar', function suite() {
   beforeEach(function before() {
     this.container = createTestContainer(this);
   });
@@ -16,8 +16,7 @@ describe('AuthRoleSearchBar', () => {
     render(
       <IntlProvider locale="en">
         <AuthRoleSearchBar />
-      </IntlProvider>, this.container,
-    );
+      </IntlProvider>, this.container);
 
     this.container.firstElementChild.nodeName.should.equal('DIV');
   });
@@ -28,8 +27,7 @@ describe('AuthRoleSearchBar', () => {
     render(
       <IntlProvider locale="en">
         <AuthRoleSearchBar value={value} />
-      </IntlProvider>, this.container,
-    );
+      </IntlProvider>, this.container);
 
     this.container.querySelector('input[type="text"]').value.should.equal(value);
   });
@@ -44,8 +42,7 @@ describe('AuthRoleSearchBar', () => {
     render(
       <IntlProvider locale="en">
         <AuthRoleSearchBar onChange={handleChange} />
-      </IntlProvider>, this.container,
-    );
+      </IntlProvider>, this.container);
 
     const input = this.container.querySelector('input[type="text"]');
     const newValue = 'new value';
@@ -67,8 +64,7 @@ describe('AuthRoleSearchBar', () => {
     render(
       <IntlProvider locale="en">
         <AuthRoleSearchBar onChange={handleChange} value="some value" />
-      </IntlProvider>, this.container,
-    );
+      </IntlProvider>, this.container);
 
     const clearButton = this.container.querySelector('button');
 
