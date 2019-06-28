@@ -545,6 +545,23 @@ export default (configContext) => {
             },                
           },
         },
+        citationDescription: {
+          [config]: {
+            messages: defineMessages({
+              name: {
+                id: 'field.uoc_common.citationDescription.name',
+                defaultMessage: 'Citation description', // FIX ME this is temporary
+              },
+            }),
+            required: true,
+            view: {
+              type: TextInput,
+              props: {
+                multiline: true,
+              },
+            },
+          },
+        },
       },
     },
   };
