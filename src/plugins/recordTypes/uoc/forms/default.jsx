@@ -87,6 +87,14 @@ const template = (configContext) => {
         </Field>
 
         <Field name="citationDescription" />
+
+        <Cols>
+          <Col>
+            <Field name="dateRequested" />
+            <Field name="dateFulfilled" />
+          </Col>
+          <Col />
+        </Cols>
       </Panel>
     </Field>
   );

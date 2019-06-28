@@ -562,6 +562,34 @@ export default (configContext) => {
             },
           },
         },
+        dateRequested: {
+          [config]: {
+            dataType: DATA_TYPE_DATE,
+            messages: defineMessages({
+              name: {
+                id: 'field.uoc_common.dateRequested.name',
+                defaultMessage: 'Date requested',
+              },
+            }),
+            view: {
+              type: DateInput,
+            },
+          },
+        },
+        dateFulfilled: {
+          [config]: {
+            dataType: DATA_TYPE_DATE,
+            messages: defineMessages({
+              name: {
+                id: 'field.uoc_common.dateFulfilled.name',
+                defaultMessage: 'Date fulfilled',
+              },
+            }),
+            view: {
+              type: DateInput,
+            },
+          },
+        },
       },
     },
   };
