@@ -1011,6 +1011,19 @@ export default (configContext) => {
             },
           },
         },
+        linkToContract: {
+          [config]: {
+            messages: defineMessages({
+              name: {
+                id: 'field.uoc_common.linkToContract.name',
+                defaultMessage: 'Link to contract',
+              },
+            }),
+            view: {
+              type: URLInput,
+            },
+          },
+        },
       },
     },
   };
