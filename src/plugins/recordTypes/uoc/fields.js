@@ -860,7 +860,7 @@ export default (configContext) => {
               name: {
                 id: 'field.uoc_common.obligationsFulfilled.name',
                 defaultMessage: 'Obligations fulfilled',
-              }
+              },
             }),
             dataType: DATA_TYPE_BOOL,
             view: {
@@ -920,13 +920,13 @@ export default (configContext) => {
                   name: {
                     id: 'field.uoc_common.staffRole.name',
                     defaultMessage: 'Role',
-                  }
+                  },
                 }),
                 view: {
                   type: TermPickerInput,
                   props: {
-                    source: 'uocstaffroles'
-                  }
+                    source: 'uocstaffroles',
+                  },
                 },
               },
             },
@@ -935,7 +935,7 @@ export default (configContext) => {
                 messages: defineMessages({
                   fullName: {
                     id: 'field.uoc_common.staffHours.fullName',
-                    defaultMessage: 'Staff hours spent',         
+                    defaultMessage: 'Staff hours spent',
                   },
                   name: {
                     id: 'field.uoc_common.staffHours.name',
