@@ -83,6 +83,7 @@ const template = (configContext) => {
           </Col>
         </Cols>
 
+        <Field name="linkToContract" />
         <Field name="authorizationGroupList">
           <Field name="authorizationGroup">
             <Field name="authorizedBy" />
