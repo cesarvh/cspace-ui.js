@@ -138,7 +138,6 @@ const template = (configContext) => {
         </Row>
 
         <Field name="note" />
-
         <Row>
           <Field name="provisos" />
           <Field name="obligationsFulfilled" />
