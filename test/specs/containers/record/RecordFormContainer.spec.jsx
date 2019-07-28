@@ -58,8 +58,7 @@ describe('RecordFormContainer', () => {
         csid={csid}
         recordType={recordType}
         recordTypeConfig={recordTypeConfig}
-      />, context,
-    );
+      />, context);
 
     const result = shallowRenderer.getRenderOutput();
 
@@ -80,8 +79,7 @@ describe('RecordFormContainer', () => {
         csid={csid}
         recordType={recordType}
         recordTypeConfig={recordTypeConfig}
-      />, context,
-    );
+      />, context);
 
     const result = shallowRenderer.getRenderOutput();
 
@@ -104,8 +102,7 @@ describe('RecordFormContainer', () => {
         csid={csid}
         recordType={recordType}
         recordTypeConfig={recordTypeConfig}
-      />, context,
-    );
+      />, context);
 
     const result = shallowRenderer.getRenderOutput();
 
@@ -128,8 +125,7 @@ describe('RecordFormContainer', () => {
         csid={csid}
         recordType={recordType}
         recordTypeConfig={recordTypeConfig}
-      />, context,
-    );
+      />, context);
 
     const result = shallowRenderer.getRenderOutput();
 
@@ -152,8 +148,7 @@ describe('RecordFormContainer', () => {
         csid={csid}
         recordType={recordType}
         recordTypeConfig={recordTypeConfig}
-      />, context,
-    );
+      />, context);
 
     const result = shallowRenderer.getRenderOutput();
 
@@ -175,8 +170,7 @@ describe('RecordFormContainer', () => {
         csid={csid}
         recordType={recordType}
         recordTypeConfig={recordTypeConfig}
-      />, context,
-    );
+      />, context);
 
     const result = shallowRenderer.getRenderOutput();
 

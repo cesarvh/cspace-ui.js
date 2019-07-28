@@ -123,7 +123,7 @@ describe('invocationHelpers', () => {
       });
     });
 
-    it('should convert array params to multiple key/value pairs with the same key', () => {
+    it('should convert array params to multiple key/value pairs with the same key', function test() {
       const invocationDescriptor = Immutable.Map({
         mode: 'nocontext',
       });
