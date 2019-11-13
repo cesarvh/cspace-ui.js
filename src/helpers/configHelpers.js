@@ -851,3 +851,15 @@ export const getFirstColumnName = (config, recordType, columnSetName = 'default'
 
   return orderedColumnNames[0];
 };
+
+export const getRecordFieldOptionListName = (recordType, rootPath) => {
+  const atPath = rootPath ? `@${rootPath}` : '';
+
+  return `_field_${recordType}${atPath}`;
+};
+
+export const getRecordGroupOptionListName = (recordType, rootPath) => {
+  const atPath = rootPath ? `@${rootPath}` : '';
+
+  return `_fieldgroup_${recordType}${atPath}`;
+};
