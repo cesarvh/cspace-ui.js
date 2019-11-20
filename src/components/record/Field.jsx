@@ -154,10 +154,6 @@ export default function Field(props, context) {
 
   const configuredProps = viewConfig.props || {};
   const providedProps = {};
-
-  // FIXME: Do this without looking at the base component propTypes, so that propTypes can be
-  // removed in production builds.
-  // eslint-disable-next-line react/forbid-foreign-prop-types
   const basePropTypes = BaseComponent.propTypes;
 
   Object.keys(props).forEach((propName) => {

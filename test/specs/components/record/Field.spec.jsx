@@ -352,7 +352,7 @@ describe('Field', () => {
     result.should.not.have.property('baz');
   });
 
-  it('should render a DateInput as the search view for field whose view is a StructuredDateInput, if no search view is explicitly configured', () => {
+  it('should render a DateInput as the search view for field whose view is a StructuredDateInput, if no search view is explicitly configured', function test() {
     const context = {
       config,
       recordType: 'collectionobject',
