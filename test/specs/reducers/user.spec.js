@@ -9,9 +9,11 @@ import {
   AUTH_RENEW_FULFILLED,
   LOGIN_FULFILLED,
   LOGOUT_FULFILLED,
+  PREFS_LOADED,
 } from '../../../src/constants/actionCodes';
 
 import reducer, {
+  arePrefsLoaded,
   getPerms,
   getRoleNames,
   getScreenName,
@@ -330,5 +332,17 @@ describe('user reducer', function suite() {
         },
       },
     }));
+  });
+
+  it('should handle PREFS_LOADED', function test() {
+    const state = reducer(undefined, {
+      type: PREFS_LOADED,
+    });
+
+    state.should.equal(Immutable.Map({
+      prefsLoaded: true,
+    }));
+
+    arePrefsLoaded(state).should.equal(true);
   });
 });
