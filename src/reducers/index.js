@@ -67,7 +67,9 @@ export const getUserScreenName = (state) => fromUser.getScreenName(state.user);
 
 export const getUserUserId = (state) => fromUser.getUserId(state.user);
 
-export const getUserUsername = (state) => fromUser.getUsername(state.user);
+export const getUserRoleNames = state => fromUser.getRoleNames(state.user);
+
+export const getLoginUsername = state => fromLogin.getUsername(state.login);
 
 export const getUserPerms = (state) => fromUser.getPerms(state.user);
 

@@ -299,7 +299,8 @@ export const validateFieldValue = (recordTypeConfig, csid, path, value) => (disp
     roleNames: getUserRoleNames(state),
   };
 
-  return validateField(validationContext, true)
+
+  return validateField(value, [], recordData, subrecordData, fieldDescriptor, true)
     .then((errors) => {
       if (errors) {
         dispatch({

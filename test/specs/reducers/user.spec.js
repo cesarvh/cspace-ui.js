@@ -118,8 +118,8 @@ describe('user reducer', () => {
     getScreenName(state).should.equal(screenName);
   });
 
-  context('on ACCOUNT_ROLES_READ_FULFILLED', () => {
-    it('should set the user\'s role names from the response', () => {
+  context('on ACCOUNT_ROLES_READ_FULFILLED', function context() {
+    it('should set the user\'s role names from the response', function test() {
       const response = {
         data: {
           'ns2:account_role': {
@@ -155,7 +155,7 @@ describe('user reducer', () => {
       getRoleNames(state).should.equal(state.get('roleNames'));
     });
 
-    it('should set the user\'s role names when there is a single (non-array) role', () => {
+    it('should set the user\'s role names when there is a single (non-array) role', function test() {
       const response = {
         data: {
           'ns2:account_role': {
@@ -183,7 +183,7 @@ describe('user reducer', () => {
       getRoleNames(state).should.equal(state.get('roleNames'));
     });
 
-    it('should not change the state when there are no roles', () => {
+    it('should not change the state when there are no roles', function test() {
       const response = {
         data: {
           'ns2:account_role': {
@@ -203,7 +203,7 @@ describe('user reducer', () => {
     });
   });
 
-  it('should handle AUTH_RENEW_FULFILLED', () => {
+  it('should handle AUTH_RENEW_FULFILLED', function test() {
     const config = {
       recordTypes: {
         collectionobject: {

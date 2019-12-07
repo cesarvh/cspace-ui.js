@@ -151,7 +151,7 @@ describe('account action creator', () => {
     });
   });
 
-  describe('readAccountPerms', () => {
+  describe('readAccountPerms', function actionSuite() {
     const store = mockStore();
     const config = {};
 
@@ -163,8 +163,10 @@ describe('account action creator', () => {
       },
     };
 
-    before(() => store.dispatch(configureCSpace())
-      .then(() => store.clearActions()));
+    before(() =>
+      store.dispatch(configureCSpace())
+        .then(() => store.clearActions())
+    );
 
     beforeEach(() => {
       moxios.install();
@@ -175,7 +177,7 @@ describe('account action creator', () => {
       moxios.uninstall();
     });
 
-    it('should dispatch ACCOUNT_PERMS_READ_FULFILLED on success', () => {
+    it('should dispatch ACCOUNT_PERMS_READ_FULFILLED on success', function test() {
       moxios.stubRequest(accountPermsUrl, {
         status: 200,
         response: accountPermsPayload,
@@ -202,7 +204,7 @@ describe('account action creator', () => {
         });
     });
 
-    it('should dispatch ACCOUNT_PERMS_READ_REJECTED on error', () => {
+    it('should dispatch ACCOUNT_PERMS_READ_REJECTED on error', function test() {
       moxios.stubRequest(accountPermsUrl, {
         status: 400,
         response: {},
@@ -219,9 +221,10 @@ describe('account action creator', () => {
     });
   });
 
-  describe('readAccountRoles', () => {
-    const accountId = '1234';
-    const accountRolesUrl = `/cspace-services/accounts/${accountId}/accountroles`;
+  describe('readAccountRoles', function actionSuite() {
+    const store = mockStore();
+
+    const accountRolesUrl = '/cspace-services/accounts/0/accountroles';
 
     const accountRolesPayload = {
       'ns2:account_role': {
@@ -230,16 +233,10 @@ describe('account action creator', () => {
       },
     };
 
-    const store = mockStore({
-      user: Immutable.fromJS({
-        account: {
-          accountId,
-        },
-      }),
-    });
-
-    before(() => store.dispatch(configureCSpace())
-      .then(() => store.clearActions()));
+    before(() =>
+      store.dispatch(configureCSpace())
+        .then(() => store.clearActions())
+    );
 
     beforeEach(() => {
       moxios.install();
@@ -250,7 +247,7 @@ describe('account action creator', () => {
       moxios.uninstall();
     });
 
-    it('should dispatch ACCOUNT_ROLES_READ_FULFILLED on success', () => {
+    it('should dispatch ACCOUNT_ROLES_READ_FULFILLED on success', function test() {
       moxios.stubRequest(accountRolesUrl, {
         status: 200,
         response: accountRolesPayload,
@@ -274,7 +271,7 @@ describe('account action creator', () => {
         });
     });
 
-    it('should dispatch ACCOUNT_ROLES_READ_REJECTED on error', () => {
+    it('should dispatch ACCOUNT_ROLES_READ_REJECTED on error', function test() {
       moxios.stubRequest(accountRolesUrl, {
         status: 400,
         response: {},

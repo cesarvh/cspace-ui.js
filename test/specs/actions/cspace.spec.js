@@ -61,7 +61,7 @@ describe('cspace action creator', () => {
       session.config().should.have.property('url', 'http://something.org');
     });
 
-    it('should dispatch CSPACE_CONFIGURED, ACCOUNT_PERMS_READ_FULFILLED, ACCOUNT_ROLES_READ_FULFILLED, PREFS_LOADED, and AUTH_VOCABS_READ_FULFILLED', () => {
+    it('should dispatch CSPACE_CONFIGURED, ACCOUNT_PERMS_READ_FULFILLED, ACCOUNT_ROLES_READ_FULFILLED, PREFS_LOADED, and AUTH_VOCABS_READ_FULFILLED', function test() {
       moxios.stubRequest(/.*/, {
         status: 200,
         response: {},
