@@ -541,21 +541,21 @@ export const isFieldRepeating = (fieldDescriptor) => {
   return false;
 };
 
-export const isFieldRequired = (computeContext) => {
-  const { fieldDescriptor } = computeContext;
+export const isFieldRequired = (validationContext) => {
+  const { fieldDescriptor } = validationContext;
 
   let required = get(fieldDescriptor, [configKey, 'required']);
 
   if (typeof required === 'function') {
-    const callComputeContext = { ...computeContext };
+    const requiredContext = Object.assign({}, validationContext);
 
-    // Don't include the data property of the compute context when calling the function, since it
+    // Don't include the data property of the validation context in the required context, since it
     // doesn't really make sense to have the required state of a field depend on the value in the
     // field.
 
-    delete callComputeContext.data;
+    delete requiredContext.data;
 
-    required = required(callComputeContext);
+    required = required(requiredContext);
   }
 
   return !!required;

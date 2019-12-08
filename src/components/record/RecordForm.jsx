@@ -68,15 +68,11 @@ const defaultProps = {
 };
 
 const childContextTypes = {
-  config: PropTypes.shape({
-    recordTypes: PropTypes.object,
-  }),
+  config: PropTypes.object,
   formName: PropTypes.string,
   recordData: PropTypes.instanceOf(Immutable.Map),
   recordType: PropTypes.string,
-  recordTypeConfig: PropTypes.PropTypes.shape({
-    fields: PropTypes.object,
-  }),
+  recordTypeConfig: PropTypes.object,
   roleNames: PropTypes.instanceOf(Immutable.List),
   subrecordData: PropTypes.instanceOf(Immutable.Map),
   vocabulary: PropTypes.string,

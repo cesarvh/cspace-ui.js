@@ -1121,8 +1121,8 @@ describe('configHelpers', () => {
         recordData,
         fieldDescriptor: {
           [configKey]: {
-            required: (computeContext) => {
-              requiredRecordData = computeContext.recordData;
+            required: (requiredContext) => {
+              requiredRecordData = requiredContext.recordData;
 
               return false;
             },
@@ -1133,17 +1133,17 @@ describe('configHelpers', () => {
       requiredRecordData.should.equal(recordData);
     });
 
-    it('should not include the data property in the compute context passed to a required function', () => {
+    it('should not include the data property from the validation context in the context passed to a required function', function test() {
       const recordData = Immutable.Map();
 
-      let computeContext = null;
+      let requiredContext = null;
 
       isFieldRequired({
         recordData,
         fieldDescriptor: {
           [configKey]: {
-            required: (computeContextArg) => {
-              computeContext = computeContextArg;
+            required: (requiredContextArg) => {
+              requiredContext = requiredContextArg;
 
               return true;
             },
@@ -1152,12 +1152,12 @@ describe('configHelpers', () => {
         data: '123',
       }).should.equal(true);
 
-      computeContext.should.have.property('recordData');
-      computeContext.should.have.property('fieldDescriptor');
-      computeContext.should.not.have.property('data');
+      requiredContext.should.have.property('recordData');
+      requiredContext.should.have.property('fieldDescriptor');
+      requiredContext.should.not.have.property('data');
     });
 
-    it('should default to false', () => {
+    it('should default to false', function test() {
       isFieldRequired({
         fieldDescriptor: {},
       }).should.equal(false);
