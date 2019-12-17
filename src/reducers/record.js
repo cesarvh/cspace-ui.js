@@ -57,8 +57,7 @@ import {
 
 const BASE_NEW_RECORD_KEY = '';
 
-const unsavedRecordKey = subrecordName =>
-  (subrecordName ? `${BASE_NEW_RECORD_KEY}/${subrecordName}` : BASE_NEW_RECORD_KEY);
+const unsavedRecordKey = (subrecordName) => (subrecordName ? `${BASE_NEW_RECORD_KEY}/${subrecordName}` : BASE_NEW_RECORD_KEY);
 
 const getCurrentData = (state, csid) => state.getIn([csid, 'data', 'current']);
 const setCurrentData = (state, csid, data) => state.setIn([csid, 'data', 'current'], data);
@@ -78,14 +77,15 @@ const clear = (state, csid) => {
   const subrecord = recordState.get('subrecord');
 
   if (subrecord) {
-    nextState = subrecord.reduce((reducedState, subrecordCsid) =>
-      clear(reducedState, subrecordCsid), nextState);
+    nextState = subrecord.reduce(
+      (reducedState, subrecordCsid) => clear(reducedState, subrecordCsid), nextState,
+    );
   }
 
   return nextState.delete(csid);
 };
 
-const clearAll = state => state.clear();
+const clearAll = (state) => state.clear();
 
 const clearFiltered = (state, filter) => {
   let nextState = state;
@@ -149,7 +149,7 @@ const sortFieldInstances = (state, action) => {
   const comparator = (str1, str2) => str1.localeCompare(str2, config.locale);
 
   const sortedList = byField
-    ? list.sortBy(item => item.get(byField), comparator)
+    ? list.sortBy((item) => item.get(byField), comparator)
     : list.sort(comparator);
 
   const updatedData = deepSet(data, path, sortedList);
@@ -221,7 +221,7 @@ const doCreateNew = (state, config, recordTypeConfig, computeContext, options = 
             cloneCsid: subrecordCsid,
             subrecordName: name,
             stickyFields,
-          }
+          },
         );
 
         cloneSubrecordCsid = `${csid}/${name}`;
@@ -232,7 +232,7 @@ const doCreateNew = (state, config, recordTypeConfig, computeContext, options = 
       }
 
       nextState = nextState.setIn(
-        [csid, 'subrecord', name], cloneSubrecordCsid
+        [csid, 'subrecord', name], cloneSubrecordCsid,
       );
     });
   }
@@ -391,7 +391,7 @@ const handleRecordSaveFulfilled = (state, action) => {
   if (relatedSubjectCsid) {
     nextState = nextState.setIn(
       [relatedSubjectCsid, 'relationUpdatedTime'],
-      getUpdatedTimestamp(data)
+      getUpdatedTimestamp(data),
     );
   }
 
@@ -414,15 +414,15 @@ const handleRecordSaveFulfilled = (state, action) => {
   }
 
   persistCsids = new Set(persistCsids.filter(
-    value => (value !== null && typeof value !== 'undefined'))
-  );
+    (value) => (value !== null && typeof value !== 'undefined'),
+  ));
 
-  nextState = clearFiltered(nextState, (recordState, candidateCsid) =>
-    !persistCsids.has(candidateCsid) &&
-    !candidateCsid.startsWith(`${BASE_NEW_RECORD_KEY}/`) && // Don't clear unsaved subrecord data
-    !recordState.get('isSavePending') && // Don't clear records that are being saved
-    candidateCsid !== recordPagePrimaryCsid // Don't clear the primary record data
-  );
+  nextState = clearFiltered(nextState, (recordState, candidateCsid) => (
+    !persistCsids.has(candidateCsid)
+    && !candidateCsid.startsWith(`${BASE_NEW_RECORD_KEY}/`) // Don't clear unsaved subrecord data
+    && !recordState.get('isSavePending') // Don't clear records that are being saved
+    && candidateCsid !== recordPagePrimaryCsid // Don't clear the primary record data
+  ));
 
   return nextState;
 };
@@ -467,7 +467,7 @@ const revertRecord = (state, action) => {
         const revertedSubrecordCsid = deepGet(baselineData, csidField);
 
         nextState = nextState.setIn(
-          [csid, 'subrecord', subrecordName], revertedSubrecordCsid
+          [csid, 'subrecord', subrecordName], revertedSubrecordCsid,
         );
 
         // Revert the reattached subrecord.
@@ -630,10 +630,10 @@ const handleTransitionFulfilled = (state, action) => {
     // good time, since the deletion of a record may affect other records via service layer
     // handlers.
 
-    nextState = clearFiltered(nextState, (recordState, candidateCsid) =>
-      !recordState.get('isSavePending') && // Don't clear records that are being saved
-      candidateCsid !== recordPagePrimaryCsid // Don't clear the primary record data
-    );
+    nextState = clearFiltered(nextState, (recordState, candidateCsid) => (
+      !recordState.get('isSavePending') // Don't clear records that are being saved
+      && candidateCsid !== recordPagePrimaryCsid // Don't clear the primary record data
+    ));
   } else {
     const newData = get(action, ['payload', 'data']);
 
@@ -648,7 +648,7 @@ const handleTransitionFulfilled = (state, action) => {
   if (relatedSubjectCsid) {
     nextState = nextState.setIn(
       [relatedSubjectCsid, 'relationUpdatedTime'],
-      updatedTimestamp
+      updatedTimestamp,
     );
   }
 
@@ -667,15 +667,14 @@ const handleDeleteFulfilled = (state, action) => {
   if (relatedSubjectCsid) {
     nextState = nextState.setIn(
       [relatedSubjectCsid, 'relationUpdatedTime'],
-      updatedTimestamp
+      updatedTimestamp,
     );
   }
 
   return nextState;
 };
 
-const detachSubrecord = (state, action) =>
-  createNewSubrecord(state, action);
+const detachSubrecord = (state, action) => createNewSubrecord(state, action);
 
 const handleLoginFulfilled = (state, action) => {
   const {
@@ -720,9 +719,7 @@ const updateItemRefStates = (data, refMap) => {
     existingItems = Immutable.List.of(existingItems);
   }
 
-  const updatedItems = existingItems.map(item =>
-    item.set('referenced', refMap[item.get('csid')])
-  );
+  const updatedItems = existingItems.map((item) => item.set('referenced', refMap[item.get('csid')]));
 
   return data.setIn(['document', 'ns2:abstract-common-list', 'list-item'], updatedItems);
 };
@@ -819,7 +816,7 @@ export default (state = Immutable.Map(), action) => {
       return handleSubrecordCreated(state, action);
     case SUBRECORD_READ_FULFILLED:
       return state.setIn(
-        [action.meta.csid, 'subrecord', action.meta.subrecordName], action.meta.subrecordCsid
+        [action.meta.csid, 'subrecord', action.meta.subrecordName], action.meta.subrecordCsid,
       );
     case REVERT_RECORD:
       return revertRecord(state, action);
@@ -859,15 +856,16 @@ export const getSubrecordCsid = (state, csid, subrecordName) => state.getIn([csi
 export const getSubrecordData = (state, csid) => {
   const subrecords = state.getIn([csid, 'subrecord']);
 
-  return (subrecords ? subrecords.map(subrecordCsid => getData(state, subrecordCsid)) : null);
+  return (subrecords ? subrecords.map((subrecordCsid) => getData(state, subrecordCsid)) : null);
 };
 
 export const getRelationUpdatedTimestamp = (state, csid) => state.getIn([csid, 'relationUpdatedTime']);
 
-export const getNewData = state => getData(state, unsavedRecordKey());
+export const getNewData = (state) => getData(state, unsavedRecordKey());
 
-export const getNewSubrecordCsid = (state, subrecordName) =>
-  getSubrecordCsid(state, unsavedRecordKey(), subrecordName);
+export const getNewSubrecordCsid = (state, subrecordName) => (
+  getSubrecordCsid(state, unsavedRecordKey(), subrecordName)
+);
 
 export const getValidationErrors = (state, csid) => state.getIn([csid, 'validation']);
 
@@ -890,7 +888,7 @@ export const isModified = (state, csid) => {
 
   const subrecords = state.getIn([csid, 'subrecord']);
 
-  if (subrecords && subrecords.find(subrecordCsid => isModified(state, subrecordCsid))) {
+  if (subrecords && subrecords.find((subrecordCsid) => isModified(state, subrecordCsid))) {
     return true;
   }
 
@@ -902,7 +900,7 @@ export const isModifiedExceptPart = (state, csid, exceptPart) => {
 
   const subrecords = state.getIn([csid, 'subrecord']);
 
-  if (subrecords && subrecords.find(subrecordCsid => isModified(state, subrecordCsid))) {
+  if (subrecords && subrecords.find((subrecordCsid) => isModified(state, subrecordCsid))) {
     return true;
   }
 
@@ -929,8 +927,8 @@ export const isModifiedExceptPart = (state, csid, exceptPart) => {
   }
 
   const modifiedPart = currentDocument.keySeq()
-    .filter(part => (part !== exceptPart && !part.startsWith('@')))
-    .find(part => currentDocument.get(part) !== baselineDocument.get(part));
+    .filter((part) => (part !== exceptPart && !part.startsWith('@')))
+    .find((part) => currentDocument.get(part) !== baselineDocument.get(part));
 
   return !!modifiedPart;
 };
