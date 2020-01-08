@@ -59,6 +59,7 @@ const propTypes = {
   onCancelButtonClick: PropTypes.func,
   onCloseButtonClick: PropTypes.func,
   onInvokeButtonClick: PropTypes.func,
+  getMimeTypes: PropTypes.func,
 };
 
 export default class InvocationModal extends Component {
@@ -229,6 +230,11 @@ export default class InvocationModal extends Component {
     } = this.props;
 
     const {
+      csid,
+      getMimeTypes,
+    } = this.props;
+
+    const {
       invocationDescriptor,
     } = this.state;
 
@@ -246,8 +252,8 @@ export default class InvocationModal extends Component {
           <OptionPickerInput
             blankable={false}
             label={<Label><FormattedMessage {...messages.format} /></Label>}
-            source="reportMimeTypes"
-            prefilter={mimeList ? prefilter : null}
+            source= {"reportMimeTypes"}
+            prefilter= {mimeList ? prefilter : null}
             value={invocationDescriptor.get('outputMIME')}
             onCommit={this.handleFormatPickerCommit}
             // blankable
@@ -257,6 +263,8 @@ export default class InvocationModal extends Component {
     }
     return null;
   }
+
+
 
   renderButtonBar() {
     const {
