@@ -237,14 +237,14 @@ export default class InvocationModal extends Component {
       invocationDescriptor,
     } = this.state;
 
-    let mimeList = []
+    let mimeList = [];
+
     if (getMimeTypes) {
-      mimeList = getMimeTypes(csid)
-      mimeList = mimeList.getIn(['document', 'ns2:reports_common', 'supportsOutputMIMEList', 'outputMIME']);
+      mimeList = getMimeTypes(csid).getIn(['document', 'ns2:reports_common', 'supportsOutputMIMEList', 'outputMIME']);
     }
 
-    const prefilter = (option) => mimeList.contains(option.value);
-    
+    const prefilter = option => mimeList.contains(option.value);
+
     if (recordType === 'report') {
       let mimeList = [];
 
@@ -262,8 +262,8 @@ export default class InvocationModal extends Component {
           <OptionPickerInput
             blankable={false}
             label={<Label><FormattedMessage {...messages.format} /></Label>}
-            source= {"reportMimeTypes"}
-            prefilter= {mimeList ? prefilter : null}
+            source={'reportMimeTypes'}
+            prefilter={mimeList ? prefilter : null}
             value={invocationDescriptor.get('outputMIME')}
             onCommit={this.handleFormatPickerCommit}
             // blankable
@@ -273,8 +273,6 @@ export default class InvocationModal extends Component {
     }
     return null;
   }
-
-
 
   renderButtonBar() {
     const {
