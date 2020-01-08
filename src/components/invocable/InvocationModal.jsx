@@ -252,8 +252,8 @@ export default class InvocationModal extends Component {
           <OptionPickerInput
             blankable={false}
             label={<Label><FormattedMessage {...messages.format} /></Label>}
-            source= {"reportMimeTypes"}
-            prefilter= {mimeList ? prefilter : null}
+            source={'reportMimeTypes'}
+            prefilter={mimeList ? prefilter : null}
             value={invocationDescriptor.get('outputMIME')}
             onCommit={this.handleFormatPickerCommit}
             // blankable
@@ -263,8 +263,6 @@ export default class InvocationModal extends Component {
     }
     return null;
   }
-
-
 
   renderButtonBar() {
     const {
