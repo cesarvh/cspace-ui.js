@@ -22,5 +22,7 @@ export default (configContext) => (data) => {
 
   owner = getDisplayName(owner) || owner;
 
+  owner = getDisplayName(owner) || owner;
+
   return [title, owner].filter((part) => !!part).join(' – ');
 };
