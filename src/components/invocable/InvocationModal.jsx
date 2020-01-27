@@ -237,7 +237,7 @@ export default class InvocationModal extends Component {
     const {
       invocationDescriptor,
     } = this.state;
-
+ 
     if (recordType === 'report') {
       let mimeList = [];
 
