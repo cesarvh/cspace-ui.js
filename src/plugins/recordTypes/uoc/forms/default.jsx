@@ -38,22 +38,36 @@ const template = (configContext) => {
             </Row>
           </Col>
 
-          <Col>
-            <Field name="projectId" />
+        <Row>
+          <Field name="referenceNumber" />
+          <Field name="projectId" />
+        </Row>
 
-            <Row>
-              <Col>
-                <Field name="subcollection" />
-              </Col>
+        <Row>
+          <Cols>
+            <Col>
+              <Field name="methodList">
+                <Field name="method" />
+              </Field>
+            </Col>
 
-              <Col>
-                <Field name="materialTypeList">
-                  <Field name="materialType" />
-                </Field>
-              </Col>
-            </Row>
-          </Col>
-        </Cols>
+            <Col>
+              <Field name="collectionTypeList">
+                <Field name="collectionType" />
+              </Field>
+            </Col>
+
+            <Col>
+              <Field name="subcollection" />
+            </Col>
+
+            <Col>
+              <Field name="materialTypeList">
+                <Field name="materialType" />
+              </Field>
+            </Col>
+          </Cols>
+        </Row>
 
         <Field name="userGroupList">
           <Field name="userGroup">
