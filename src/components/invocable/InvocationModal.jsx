@@ -237,7 +237,7 @@ export default class InvocationModal extends Component {
     const {
       invocationDescriptor,
     } = this.state;
- 
+
     if (recordType === 'report') {
       let mimeList = [];
 
@@ -245,7 +245,7 @@ export default class InvocationModal extends Component {
         mimeList = data.getIn(['document', 'ns2:reports_common', 'supportsOutputMIMEList', 'outputMIME']);
       }
 
-      const prefilter = (option) => mimeList.includes(option.value);
+      const prefilter = option => mimeList.includes(option.value);
 
       return (
         <div className={formatPickerStyles.common}>
