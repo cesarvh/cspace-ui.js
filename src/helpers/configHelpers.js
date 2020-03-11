@@ -496,10 +496,10 @@ export const isFieldCloneable = (fieldDescriptor, computeContext) => {
   return true;
 };
 
-export const isFieldReadOnly = (computeContext) => {
+export const isFieldViewReadOnly = (computeContext) => {
   const { fieldDescriptor } = computeContext;
 
-  let readOnly = get(fieldDescriptor, [configKey, 'readOnly']);
+  let readOnly = get(fieldDescriptor, [configKey, 'view', 'props', 'readOnly']);
 
   if (typeof readOnly === 'function') {
     const callComputeContext = { ...computeContext };
