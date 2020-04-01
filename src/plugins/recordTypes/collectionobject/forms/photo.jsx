@@ -80,7 +80,7 @@ const template = (configContext) => {
         </Field>
       </Panel>
 
-      <Panel name="desc" collapsible collapsed>
+      {/* <Panel name="desc" collapsible collapsed>
         <Row>
           <Col>
             <Field name="copyNumber" />
@@ -246,7 +246,7 @@ const template = (configContext) => {
 
       <Panel name="hierarchy" collapsible collapsed>
         <Field name="relation-list-item" subpath="rel:relations-common-list" />
-      </Panel>
+      </Panel> */}
     </Field>
   );
 };

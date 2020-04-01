@@ -157,17 +157,27 @@ const sortFieldInstances = (state, action) => {
   return setCurrentData(state, csid, updatedData);
 };
 
-const doCreateNew = (state, config, recordTypeConfig, options = {}) => {
+const doCreateNew = (state, config, recordTypeConfig, form, options = {}) => {
   const {
     cloneCsid,
     subrecordName,
     stickyFields,
   } = options;
 
+  const validationContext  = {
+    recordTypeConfig,
+    csid: cloneCsid,
+    data: getCurrentData(state, cloneCsid),
+    form,
+    fieldDescriptor: recordTypeConfig.fields,
+  };
+
   let data;
 
   if (cloneCsid) {
-    data = cloneRecordData(recordTypeConfig, cloneCsid, getCurrentData(state, cloneCsid));
+    data = cloneRecordData(validationContext);
+    // data = cloneRecordData(recordTypeConfig, cloneCsid, getCurrentData(state, cloneCsid));
+
   }
 
   if (!data) {
@@ -242,9 +252,10 @@ const createNewRecord = (state, action) => {
     recordTypeConfig,
     cloneCsid,
     stickyFields,
+    form,
   } = action.meta;
 
-  return doCreateNew(state, config, recordTypeConfig, {
+  return doCreateNew(state, config, recordTypeConfig, form, {
     cloneCsid,
     stickyFields,
   });

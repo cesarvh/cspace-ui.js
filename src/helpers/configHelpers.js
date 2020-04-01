@@ -482,15 +482,31 @@ export const getStickyFields = (fieldDescriptor, currentPath = []) => {
     }, []);
 };
 
-export const isFieldCloneable = (fieldDescriptor) => {
-  const config = fieldDescriptor[configKey];
 
-  if (config && 'cloneable' in config) {
-    return config.cloneable;
+// Make it look like isFieldRequired
+
+
+export const isFieldCloneable = (computeContext) => {
+  const { fieldDescriptor } = computeContext;
+  const config = fieldDescriptor[configKey];
+  
+  if (config === undefined || !('cloneable' in config)) {
+    console.log("true");
+    return true;
   }
 
-  return true;
-};
+  let cloneable = config.cloneable;
+  console.log(cloneable);
+  if (typeof(cloneable) === 'function') {
+    const callComputeContext = {...computeContext};
+
+    delete callComputeContext.data;
+
+    cloneable = cloneable(callComputeContext);
+  }
+
+  return !!cloneable;
+}
 
 export const isFieldViewReadOnly = (computeContext) => {
   const {

@@ -523,10 +523,12 @@ export const readRecord = (config, recordTypeConfig, vocabularyConfig, csid) => 
 
 export const createNewRecord = (config, recordTypeConfig, vocabularyConfig, cloneCsid) => (
   (dispatch, getState) => {
+    let state = getState();
+
     let readClone;
 
     if (cloneCsid) {
-      const data = getRecordData(getState(), cloneCsid);
+      const data = getRecordData(state, cloneCsid);
 
       if (!data) {
         // We don't have data for the record to be cloned. Read it first.
@@ -546,6 +548,14 @@ export const createNewRecord = (config, recordTypeConfig, vocabularyConfig, clon
       });
     }
 
+    // const cloneContext = {
+    //   config,
+    //   recordTypeConfig,
+    //   cloneCsid,
+    //   stickyFields: getStickyFields(state),
+    //   form: getForm(state, recordTypeConfig.name),
+    // }
+
     return (
       readClone.then(() => dispatch({
         type: CREATE_NEW_RECORD,
@@ -553,7 +563,8 @@ export const createNewRecord = (config, recordTypeConfig, vocabularyConfig, clon
           config,
           recordTypeConfig,
           cloneCsid,
-          stickyFields: getStickyFields(getState()),
+          stickyFields: getStickyFields(state),
+          form: getForm(state, recordTypeConfig.name),
         },
       }))
     );

@@ -328,12 +328,16 @@ export const createRecordData = (recordTypeConfig) => applyDefaults(
  * Clear uncloneable fields from record data. Existing (not undefined) values in fields that are
  * not cloneable are set to the default value if one exists, or undefined otherwise.
  */
-export const clearUncloneable = (fieldDescriptor, data) => {
+// export const clearUncloneable = (fieldDescriptor, data) => {
+export const clearUncloneable = (validationContext) => {
+  // change to compute context
+  const { fieldDescriptor, data } = validationContext;
+
   if (!fieldDescriptor) {
     return data;
   }
 
-  if (typeof data !== 'undefined' && !isFieldCloneable(fieldDescriptor)) {
+  if (typeof data !== 'undefined' && !isFieldCloneable(validationContext)) {
     // If the field has been configured as not cloneable and there is an existing value, replace
     // the existing value with the default value if there is one, or undefined otherwise. The old
     // UI did not set uncloneable fields to the default value, but I think this was an oversight.
@@ -389,7 +393,12 @@ export const prepareClonedHierarchy = (fromCsid, data) => {
 /**
  * Create a new record as a clone of a given record.
  */
-export const cloneRecordData = (recordTypeConfig, csid, data) => {
+export const cloneRecordData = (validationContext) => {
+  const {
+    data,
+    csid,
+  } = validationContext;
+
   if (!data) {
     return data;
   }
@@ -403,7 +412,10 @@ export const cloneRecordData = (recordTypeConfig, csid, data) => {
 
   // Reset fields that are configured as not cloneable.
 
-  clone = clearUncloneable(recordTypeConfig.fields, clone);
+  // clone = clearUncloneable(recordTypeConfig.fields, clone);
+  clone = clearUncloneable(validationContext);
+  // ALTER ME TOOO
+
   clone = prepareClonedHierarchy(csid, clone);
 
   return clone;

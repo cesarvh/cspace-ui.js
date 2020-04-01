@@ -310,6 +310,7 @@ export default (configContext) => {
                 },
               }),
               repeating: true,
+              cloneable: ({ form }) => form ==! 'photo',
               view: {
                 type: TextInput,
                 props: {
